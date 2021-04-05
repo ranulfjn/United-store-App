@@ -1,0 +1,56 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <GridView
+      android:id="@+id/gridview2"
+      android:layout_marginBottom="?attr/actionBarSize"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:horizontalSpacing="10dp"
+      android:numColumns="2"
+      android:paddingBottom="5dp"
+      android:paddingLeft="10dp"
+      android:paddingRight="10dp"
+      android:paddingTop="5dp"
+      android:stretchMode="columnWidth"
+      android:verticalSpacing="10dp" />
+
+
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingBottom="100dp"
+      android:clipToPadding="false">
+
+    <!-- Scrollable content -->
+
+  </androidx.core.widget.NestedScrollView>
+
+  <com.google.android.material.bottomappbar.BottomAppBar
+      android:id="@+id/bottomAppBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      app:hideOnScroll="true"
+      style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+      app:navigationIcon="@drawable/outline_home_white_24"
+      app:menu="@menu/bottom_app_bar"
+      />
+
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:layout_width="wrap_content"
+      android:id="@+id/floatingButton"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/baseline_add_shopping_cart_white_24"
+      app:layout_anchor="@id/bottomAppBar"
+      />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
