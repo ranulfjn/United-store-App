@@ -46,8 +46,8 @@ public class OrderAdapter extends ArrayAdapter implements Serializable {
         TextView qty=rowView.findViewById(R.id.qty);
         qty.setText(String.valueOf(listArray.get(position).getQty()));
 
-        TextView price1=rowView.findViewById(R.id.price);
-        price1.setText(String.valueOf(listArray.get(position).getPrice()));
+        //TextView price1=rowView.findViewById(R.id.price);
+       // price1.setText(String.valueOf(listArray.get(position).getPrice()));
 
        ArrayList<Integer>  priceArray= new ArrayList<>();
         int price=listArray.get(position).getQty()*listArray.get(position).getPrice();
@@ -59,10 +59,10 @@ public class OrderAdapter extends ArrayAdapter implements Serializable {
         }
 
         TextView total=rowView.findViewById(R.id.total);
-        total.setText(String.valueOf(price));
+        total.setText(String.valueOf(price)+"$");
 
 
-        Log.e("tot",finalTotal+"");
+        Log.e("tot",finalTotal+"$");
 
 
         ImageView image1=rowView.findViewById(R.id.image);

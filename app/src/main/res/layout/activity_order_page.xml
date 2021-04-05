@@ -5,23 +5,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_500sdp"
         android:id="@+id/listv">
-
     </ListView>
 
-    <TextView
-        android:id="@+id/finalTotal"
-        android:layout_marginTop="@dimen/_50sdp"
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/finalTotal"
+            android:layout_above="@+id/shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_15sdp"
+            android:textFontWeight="200"
+            android:text="Total"
+            android:textColor="@color/black">
+        </TextView>
+    <Button
+        android:id="@+id/shop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:text="Total"
-        android:textColor="@color/black">
-    </TextView>
+        android:text="Continue shopping"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:backgroundTint="@color/red">
 
+    </Button>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Checkout"
+        android:backgroundTint="@color/red"
+       android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_10sdp"
+        >
+    </Button>
+    </RelativeLayout>
 
 </LinearLayout>
