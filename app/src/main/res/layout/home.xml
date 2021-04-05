@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:src="@drawable/mainbanner" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:text="TRENDING PLAYERS"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="6"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="150dp"
+            android:src="@drawable/rashford"
+            android:layout_weight="2"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/_140sdp">
+
+        </ImageView>
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="150dp"
+            android:src="@drawable/martial"
+            android:layout_weight="2"
+            android:layout_toRightOf="@+id/img1"
+            android:layout_marginTop="@dimen/_140sdp"
+           >
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="150dp"
+            android:src="@drawable/greenwood"
+            android:layout_weight="2"
+            android:layout_toRightOf="@+id/img1"
+            android:layout_marginTop="@dimen/_140sdp"
+            >
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="-160dp"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <ImageView
+            android:id="@+id/img4"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="142dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/_255sdp"
+            android:layout_weight="2"
+            android:src="@drawable/beek">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/img5"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/_255sdp"
+            android:layout_toRightOf="@+id/img1"
+            android:layout_weight="2"
+            android:src="@drawable/wan"></ImageView>
+
+        <ImageView
+            android:id="@+id/img6"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/_255sdp"
+            android:layout_toRightOf="@+id/img1"
+            android:layout_weight="2"
+            android:src="@drawable/fernandes"></ImageView>
+    </LinearLayout>
+
+</RelativeLayout>
