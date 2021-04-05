@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     ListView listView;
     GridView gridview;
     private DataBaseHelper db;
-    int qty=0;
+    int qty=1;
     FloatingActionButton see_order;
     customAdapter customAdapter;
     @Override
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
                 Button plus = (Button) dialog.findViewById(R.id.plus);
                 if(qty==0||qty!=0){
-                    qty=0;
+                    qty=1;
                     plus.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                             order.add(new Order(id,null,name,price,qty));
                             Toast.makeText(MainActivity.this,""+name+" added to cart",Toast.LENGTH_SHORT).show();
                         }
+
                         }
 
                 });

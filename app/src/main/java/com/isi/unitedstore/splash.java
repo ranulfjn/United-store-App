@@ -20,7 +20,7 @@ public class splash extends AppCompatActivity {
                 super.run();
                 try {
                     sleep(2500);
-                    Intent intent= new Intent(splash.this,Login.class);
+                    Intent intent= new Intent(splash.this,home.class);
                     startActivity(intent);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
