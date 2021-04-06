@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -34,6 +35,8 @@ public class home extends AppCompatActivity {
 
 
 
+
+
     }
     ImageListener imageListener = new ImageListener() {
         @Override
@@ -44,6 +47,7 @@ public class home extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -67,6 +71,7 @@ public class home extends AppCompatActivity {
                     startActivity(intent3);
                     return true;
             }
+
 
             return false;
         }

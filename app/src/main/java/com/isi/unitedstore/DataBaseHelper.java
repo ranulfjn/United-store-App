@@ -190,7 +190,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
             int val = (int) database.insert("users", null, values);
             if(val != -1){
 
-                Log.e("Success","DB "+ values);
+                Log.e("Success","Added User to DB "+ values);
             }
             Log.e("Success","DB "+ val);
             database.close();
@@ -201,5 +201,41 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    //Test
+    public void getDetails() {
+        ArrayList<CustomArrayList> al_data = new ArrayList<>();
+        try {
+
+
+            final String TABLE_NAME = "users";
+
+            String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            //String[] data = null;
+            ;
+
+            if (cursor.moveToFirst()) {
+                do {
+                    String name=cursor.getString(cursor.getColumnIndex("name"));
+
+
+
+                  //  al_data.add(new CustomArrayList(id,img,name,price,description));
+                     Log.e("Working", cursor.getString(cursor.getColumnIndex("name"))+"");
+                    // get the data into array, or class variable
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            //return al_data;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+      //  return null;
     }
 }

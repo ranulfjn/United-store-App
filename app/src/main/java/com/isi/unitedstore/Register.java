@@ -76,6 +76,7 @@ public class Register extends AppCompatActivity {
                 // boolean validEmail =isEmailValid(emailStr);
                 Log.e("Details :", "" + emailStr + " " + passwordStr + " " + nameStr);
                // postNewUser(Register.this, nameStr, emailStr, passwordStr);
+                db.getDetails();
                 SetValidation();
                // db.registerUser(nameStr,passwordStr,emailStr);
 
@@ -128,6 +129,10 @@ public class Register extends AppCompatActivity {
         }
 
         if (isNameValid && isEmailValid  && isPasswordValid) {
+            String emailStr = email.getText().toString();
+            String passwordStr = password.getText().toString();
+            String nameStr = name.getText().toString();
+            db.registerUser(nameStr,passwordStr,emailStr);
             Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
         }
 

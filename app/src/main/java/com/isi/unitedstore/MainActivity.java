@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -18,9 +19,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+
       //  listView = findViewById(R.id.listView);
         gridview = findViewById(R.id.gridview2);
 
@@ -61,18 +65,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         customAdapter = new customAdapter(MainActivity.this, menu);
         gridview.setAdapter(customAdapter);
 
-        see_order=findViewById(R.id.floatingButton);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        see_order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, OrderPage.class);
-                Bundle args = new Bundle();
-                args.putSerializable("Order_list",(Serializable)order);
-                intent.putExtra("bundel",args);
-                startActivity(intent);
-            }
-        });
+
+
+
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -153,4 +151,37 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         });
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            switch (item.getItemId()) {
+                case R.id.home:
+                    Intent intent=new Intent(MainActivity.this, home.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.store:
+                    Intent intent1=new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent1);
+
+                    return true;
+                case R.id.cartBottom:
+                    Intent intent2=new Intent(MainActivity.this, OrderPage.class);
+                    Bundle args = new Bundle();
+                    args.putSerializable("Order_list",(Serializable)order);
+                    intent2.putExtra("bundel",args);
+                    startActivity(intent2);
+                    return true;
+                case R.id.profile:
+                    Intent intent3=new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent3);
+                    return true;
+            }
+
+            return false;
+        }
+    };
 }

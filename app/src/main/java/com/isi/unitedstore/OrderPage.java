@@ -2,6 +2,8 @@ package com.isi.unitedstore;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,12 +19,16 @@ public class OrderPage extends AppCompatActivity implements Serializable {
     ListView list;
     ArrayList<Integer>  priceArray= new ArrayList<>();
     OrderAdapter orderAdapter;
+    Button shop , checkout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_page);
+
+        checkout = findViewById(R.id.checkout);
+        shop=findViewById(R.id.shop);
 
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("bundel");
@@ -40,6 +46,15 @@ public class OrderPage extends AppCompatActivity implements Serializable {
 
         orderAdapter = new OrderAdapter(OrderPage.this, order);
         list.setAdapter(orderAdapter);
+
+
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderPage.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
