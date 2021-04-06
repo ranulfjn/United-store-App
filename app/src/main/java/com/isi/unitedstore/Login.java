@@ -3,10 +3,12 @@ package com.isi.unitedstore;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ public class Login extends AppCompatActivity {
     Button btn;
     EditText email , password;
     TextView register;
+    boolean isEmailValid, isPasswordValid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +34,17 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 email   = (EditText)findViewById(R.id.email);
-                String emailToValidate= email.getText().toString();
-                boolean validEmail = isEmailValid(emailToValidate);
-                Log.e("Email :" , ""+ validEmail);
+                password = (EditText) findViewById(R.id.password);
+               // String emailToValidate= email.getText().toString();
 
-                password   = (EditText)findViewById(R.id.password);
+
+
+                SetValidation();
 
                 //if(validEmail){
 
-                Intent intent=new Intent(Login.this, MainActivity.class);
-                startActivity(intent);
+               // Intent intent=new Intent(Login.this, MainActivity.class);
+               // startActivity(intent);
                 //}
             }
         });
@@ -56,28 +60,33 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-
-
     }
-    public boolean isEmailValid(String email)
-    {
-        String regExpn =
-                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+    public void SetValidation() {
+        // Check for a valid email address.
+        if (email.getText().toString().isEmpty()) {
+            email.setError(getResources().getString(R.string.email_error));
+            isEmailValid = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
+            email.setError(getResources().getString(R.string.error_invalid_email));
+            isEmailValid = false;
+        } else  {
+            isEmailValid = true;
+        }
 
-        CharSequence inputStr = email;
+        // Check for a valid password.
+        if (password.getText().toString().isEmpty()) {
+            password.setError(getResources().getString(R.string.password_error));
+            isPasswordValid = false;
+        } else if (password.getText().length() < 6) {
+            password.setError(getResources().getString(R.string.error_invalid_password));
+            isPasswordValid = false;
+        } else  {
+            isPasswordValid = true;
+        }
 
-        Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
-
-        if(matcher.matches())
-            return true;
-        else
-            return false;
+        if (isEmailValid && isPasswordValid) {
+            Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }

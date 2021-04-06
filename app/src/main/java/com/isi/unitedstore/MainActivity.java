@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 });
 
 
-                ImageButton add = (ImageButton) dialog.findViewById(R.id.add);
+                Button add = (Button) dialog.findViewById(R.id.add);
                 add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
                 });
 
-                ImageButton cancel = (ImageButton) dialog.findViewById(R.id.cancel);
+                Button cancel = (Button) dialog.findViewById(R.id.cancel);
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

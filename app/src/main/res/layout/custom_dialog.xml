@@ -61,8 +61,8 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/_13sdp"
         android:text="+"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/lightgrey"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/red"
         android:layout_marginTop="@dimen/_250sdp"
         android:layout_marginLeft="@dimen/_30sdp">
     </Button>
@@ -85,39 +85,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="@dimen/_13sdp"
-        android:backgroundTint="@color/lightgrey"
+        android:backgroundTint="@color/red"
         android:layout_marginTop="@dimen/_250sdp"
         android:layout_marginLeft="@dimen/_150sdp">
 
     </Button>
 
-    <ImageButton
+    <Button
         android:id="@+id/add"
+        android:minHeight="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@color/white"
+        android:textColor="@color/white"
+        android:text="Add to cart"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:src="@drawable/baseline_add_shopping_cart_black_18"
+        android:backgroundTint="@color/red"
         android:layout_marginRight="@dimen/_30sdp">
 
-    </ImageButton>
+    </Button>
 
-    <ImageButton
+    <Button
+        android:minHeight="0dp"
         android:id="@+id/cancel"
+        android:text="cancel"
         android:layout_width="wrap_content"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/red"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/_190sdp"
+        android:layout_marginRight="@dimen/_160sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@color/white"
-        android:src="@drawable/baseline_close_black_18">
+        >
 
-    </ImageButton>
+    </Button>
 
 
 </RelativeLayout>

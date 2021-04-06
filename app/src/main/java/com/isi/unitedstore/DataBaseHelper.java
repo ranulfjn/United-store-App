@@ -181,20 +181,21 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
     public String registerUser(String name ,String password ,String email ) {
         try {
 
+            SQLiteDatabase database = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("name", name);
+            values.put("email", email);
+            values.put("password", password);
 
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues values=new ContentValues();
-            values.put("name",name);
-            values.put("email",email);
-            values.put("password",password);
-            if((db.insert("users",null,values))!= -1)
-            {
-               Log.e("Success","Success");
+            int val = (int) database.insert("users", null, values);
+            if(val != -1){
+
+                Log.e("Success","DB "+ values);
             }
-            else
-            {
-                Log.e("Error","Error");
-            }
+            Log.e("Success","DB "+ val);
+            database.close();
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
