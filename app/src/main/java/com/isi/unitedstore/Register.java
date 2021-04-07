@@ -56,6 +56,7 @@ public class Register extends AppCompatActivity {
         registerButton = findViewById(R.id.registerBtn);
 
 
+
         db = new DataBaseHelper(Register.this);
         try {
             db.createDatabase();
@@ -77,7 +78,7 @@ public class Register extends AppCompatActivity {
                 Log.e("Details :", "" + emailStr + " " + passwordStr + " " + nameStr);
                // postNewUser(Register.this, nameStr, emailStr, passwordStr);
                 db.getDetails();
-                SetValidation();
+                SetValidation(emailStr);
                // db.registerUser(nameStr,passwordStr,emailStr);
 
 
@@ -97,7 +98,7 @@ public class Register extends AppCompatActivity {
 
     }
 
-    public void SetValidation() {
+    public void SetValidation(String emailCheck) {
         // Check for a valid name.
         if (name.getText().toString().isEmpty()) {
             name.setError(getResources().getString(R.string.name_error));
@@ -127,13 +128,18 @@ public class Register extends AppCompatActivity {
         } else  {
             isPasswordValid = true;
         }
+       boolean emailExists = db.emailExists(emailCheck);
 
-        if (isNameValid && isEmailValid  && isPasswordValid) {
+        if(emailExists){
+            email.setError("Email already exists");
+        }
+
+        if (isNameValid && isEmailValid  && isPasswordValid && !emailExists) {
             String emailStr = email.getText().toString();
             String passwordStr = password.getText().toString();
             String nameStr = name.getText().toString();
             db.registerUser(nameStr,passwordStr,emailStr);
-            Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Registration Successfully ", Toast.LENGTH_SHORT).show();
         }
 
     }

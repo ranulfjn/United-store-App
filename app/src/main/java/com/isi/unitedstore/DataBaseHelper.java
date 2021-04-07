@@ -220,12 +220,9 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
 
             if (cursor.moveToFirst()) {
                 do {
-                    String name=cursor.getString(cursor.getColumnIndex("name"));
-
-
-
+                    String name=cursor.getString(cursor.getColumnIndex("email"));
                   //  al_data.add(new CustomArrayList(id,img,name,price,description));
-                     Log.e("Working", cursor.getString(cursor.getColumnIndex("name"))+"");
+                     Log.e("Working", cursor.getString(cursor.getColumnIndex("email"))+"");
                     // get the data into array, or class variable
                 } while (cursor.moveToNext());
             }
@@ -237,5 +234,67 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
         }
 
       //  return null;
+    }
+
+
+    public boolean emailExists(String email){
+
+        try {
+
+
+            final String TABLE_NAME = "users";
+
+            String selectQuery = "SELECT  email FROM " + TABLE_NAME;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    String emailDb=cursor.getString(cursor.getColumnIndex("email"));
+                    if(emailDb.equals(email)){
+                        return true;
+                    }
+                    // get the data into array, or class variable
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+            return false;
+    }
+
+    public boolean credCheck(String email , String password){
+
+        try {
+
+
+            final String TABLE_NAME = "users";
+
+            String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    String emailDb=cursor.getString(cursor.getColumnIndex("email"));
+                    String passwordDb=cursor.getString(cursor.getColumnIndex("password"));
+                    if(emailDb.equals(email) && passwordDb.equals(password)){
+                        return true;
+                    }
+                    // get the data into array, or class variable
+                } while (cursor.moveToNext());
+            }
+
+            cursor.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
