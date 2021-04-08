@@ -26,6 +26,7 @@ public class OrderPage extends AppCompatActivity implements Serializable {
     ArrayList<cart> Cart = new ArrayList<>();
     ListView list;
     ArrayList<Integer>  priceArray= new ArrayList<>();
+    ArrayList<String> ids = new ArrayList<>();
     private DataBaseHelper db;
     OrderAdapter orderAdapter;
     Button shop , checkout, remove;
@@ -54,6 +55,11 @@ public class OrderPage extends AppCompatActivity implements Serializable {
         }
         db.openDatabase();
 
+        if(Cart.size() == 0){
+            TextView empty = findViewById(R.id.empty);
+            empty.setText("Cart is empty");
+        }
+
         Cart = db.getCart();
         for(int i=0;i<Cart.size();i++){
 
@@ -78,15 +84,33 @@ public class OrderPage extends AppCompatActivity implements Serializable {
         orderAdapter = new OrderAdapter(OrderPage.this, Cart); //order
         list.setAdapter(orderAdapter);
 
+list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(OrderPage.this ,"click",Toast.LENGTH_SHORT);
+    }
+});
+
 
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.removeItem("");
+               // db.removeItem("");
                 Intent intent = new Intent(OrderPage.this, MainActivity.class);
                 startActivity(intent);
             }
         });
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.removeItem();
+                Intent intent = new Intent(OrderPage.this, checkout.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 

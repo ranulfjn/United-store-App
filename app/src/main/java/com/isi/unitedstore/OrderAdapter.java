@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,7 +64,7 @@ public class OrderAdapter extends ArrayAdapter implements Serializable {
         }
 
         TextView total=rowView.findViewById(R.id.total);
-        total.setText(String.valueOf(price)+"$");
+        total.setText(String.valueOf(listArray.get(position).getPrice())+"$");
 
 
         Log.e("tot",finalTotal+"$");
@@ -71,6 +73,7 @@ public class OrderAdapter extends ArrayAdapter implements Serializable {
         ImageView image1=rowView.findViewById(R.id.image);
         image1.setImageBitmap(listArray.get(position).getImage());
         Button btn = rowView.findViewById(R.id.remove);
+
         
         return rowView;
     }

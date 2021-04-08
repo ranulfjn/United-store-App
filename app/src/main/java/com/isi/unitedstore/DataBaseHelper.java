@@ -366,11 +366,11 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
         return null;
     }
 
-    public void removeItem(String id){
-
+    public void removeItem(){
+        String TABLE_NAME= "cart";
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("cart","id=?",new String[]{id});
-        Log.e("Removed", ""+id);
+        db.execSQL("delete from "+ TABLE_NAME);
+        Log.e("Removed", "from DB");
 
     }
 

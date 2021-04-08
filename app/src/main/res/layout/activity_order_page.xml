@@ -9,16 +9,48 @@
     <ListView
         android:focusable="false"
         android:clickable="true"
-
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_500sdp"
+        android:layout_height="wrap_content"
         android:id="@+id/listv">
     </ListView>
+
+
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageCart"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="170dp"
+            android:layout_marginLeft="170dp"
+            android:layout_marginEnd="170dp"
+            android:layout_marginRight="170dp"
+            android:src="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/imageCart"
+            android:layout_height="wrap_content"
+            android:text="Your Cart is empty"
+            android:id="@+id/empty"
+            android:textSize="@dimen/_20sdp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp">
+        </TextView>
         <TextView
             android:id="@+id/finalTotal"
             android:layout_above="@+id/shop"
