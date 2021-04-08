@@ -143,6 +143,8 @@ public class Register extends AppCompatActivity {
             String nameStr = name.getText().toString();
             db.registerUser(nameStr,passwordStr,emailStr);
             Toast.makeText(getApplicationContext(), "Registration Successfully ", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Register.this, Login.class);
+            startActivity(intent);
         }
 
     }

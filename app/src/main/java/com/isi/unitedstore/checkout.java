@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class checkout extends AppCompatActivity {
     Button back;
@@ -24,6 +26,7 @@ public class checkout extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("Back","shop");
+
                 Intent intent = new Intent(checkout.this, MainActivity.class);
                 startActivity(intent);
             }

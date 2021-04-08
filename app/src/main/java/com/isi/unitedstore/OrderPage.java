@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,10 +56,7 @@ public class OrderPage extends AppCompatActivity implements Serializable {
         }
         db.openDatabase();
 
-        if(Cart.size() == 0){
-            TextView empty = findViewById(R.id.empty);
-            empty.setText("Cart is empty");
-        }
+
 
         Cart = db.getCart();
         for(int i=0;i<Cart.size();i++){
@@ -79,7 +77,7 @@ public class OrderPage extends AppCompatActivity implements Serializable {
        // }
 
         TextView fin=findViewById(R.id.finalTotal);
-        fin.setText("Total :"+String.valueOf(price));
+        fin.setText("Total :"+String.valueOf(price)+"$");
 
         orderAdapter = new OrderAdapter(OrderPage.this, Cart); //order
         list.setAdapter(orderAdapter);

@@ -54,7 +54,6 @@ public class Login extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 db.openDatabase();
-
                 SetValidation();
             }
         });
