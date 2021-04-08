@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -25,6 +26,7 @@ public class Login extends AppCompatActivity {
     private DataBaseHelper db;
     TextView register ,error;
     boolean isEmailValid, isPasswordValid , emailCheck,passwordCheck;
+
     public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
 
         error= findViewById(R.id.error);
 
@@ -100,10 +103,14 @@ public class Login extends AppCompatActivity {
 
         if (isEmailValid && isPasswordValid && checkCred) {
             error.setText("");
-            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences sharedpreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString("Email", email.getText().toString());
             editor.commit();
+            Intent intent=new Intent(Login.this, home.class);
+            intent.putExtra("session", sharedpreferences.getString("Email",null));
+            startActivity(intent);
+            Log.e("Name of user",""+sharedpreferences.getString("Email",null));
             Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
         }
 

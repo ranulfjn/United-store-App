@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:textColor="#DB1D24"
         android:textStyle="bold"
-        android:text="err"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"

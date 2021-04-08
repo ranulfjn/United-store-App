@@ -1,12 +1,15 @@
 package com.isi.unitedstore;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +19,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private DataBaseHelper db;
     int qty=1;
     FloatingActionButton see_order;
+    String session;
+    SharedPreferences spref;
     customAdapter customAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_main);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        session =  getIntent().getStringExtra("session");
 
 
       //  listView = findViewById(R.id.listView);
@@ -129,10 +137,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         if (qty > 0) {
                             int id =menu.get(position).getId();
                             Bitmap image=menu.get(position).getImage();
-                            String name=menu.get(position).getName();
+                            String product=menu.get(position).getName();
                             int price=menu.get(position).getPrice();
-                            order.add(new Order(id,null,name,price,qty));
-                            Toast.makeText(MainActivity.this,""+name+" added to cart",Toast.LENGTH_SHORT).show();
+
+                            db.addCart(session,product,id,qty,image,price);
+                           //order.add(new Order(id,null,product,price,qty));
+                            Toast.makeText(MainActivity.this,""+product+" added to cart",Toast.LENGTH_SHORT).show();
                         }
 
                         }
@@ -146,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         dialog.dismiss();
                     }
                 });
+
 
             }
 
@@ -176,12 +187,41 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     startActivity(intent2);
                     return true;
                 case R.id.profile:
-                    Intent intent3=new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent3);
+                    Intent intentLogin = new Intent(MainActivity.this,Login.class);
+                    startActivity(intentLogin);
+//                    PopupMenu popup = new PopupMenu(MainActivity.this, findViewById(R.id.profile));
+//                    MenuInflater inflater = popup.getMenuInflater();
+//                    inflater.inflate(R.menu.profile, popup.getMenu());
+//                    popup.show();
+//                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                        @Override
+//                        public boolean onMenuItemClick(MenuItem item) {
+//                            switch (item.getItemId()) {
+//                                case R.id.logout:
+//                                    SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+//                                    SharedPreferences.Editor editor = sharedPref.edit();
+//                                    editor.clear();
+//                                    editor.apply();
+//                                    finish();
+//                                    Toast.makeText(MainActivity.this,"Logged Out Succesfully",Toast.LENGTH_SHORT);
+//                                    return true;
+//                                case R.id.login:
+//                                    Log.e("Login","");
+//                                    Intent intent = new Intent(MainActivity.this,Login.class);
+//                                    startActivity(intent);
+//                                    return true;
+//
+//                                default:
+//                                    return false;
+//                            }
+//                        }
+//                    });
+
                     return true;
             }
 
             return false;
         }
     };
+
 }

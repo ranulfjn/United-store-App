@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
     private SQLiteDatabase myDataBase;
     private final Context myContext;
-    private static final String DATABASE_NAME = "store.db";
+    private static final String DATABASE_NAME = "united.db";
     public final static String DATABASE_PATH = "/data/data/com.isi.unitedstore/databases/";
     public static final int DATABASE_VERSION = 1;
 
@@ -154,7 +154,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
             if (cursor.moveToFirst()) {
                 do {
                     String name=cursor.getString(cursor.getColumnIndex("name"));
-                    String description=cursor.getString(cursor.getColumnIndex("des"));
+                    //String description=cursor.getString(cursor.getColumnIndex("des"));
                     int price=cursor.getInt(cursor.getColumnIndex("price"));
                     int id=cursor.getInt(cursor.getColumnIndex("id"));
 
@@ -162,7 +162,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
                     Bitmap img = BitmapFactory.decodeByteArray(image,0,image.length);
 
 
-                    al_data.add(new CustomArrayList(id,img,name,price,description));
+                    al_data.add(new CustomArrayList(id,img,name,price,null));
                    // Log.e("Working", cursor.getString(cursor.getColumnIndex("title"))+"");
                     // get the data into array, or class variable
                 } while (cursor.moveToNext());
@@ -297,4 +297,81 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Serializable {
 
         return false;
     }
+    public void addCart(String name , String product ,int id ,int qty, Bitmap image, int price){
+
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+
+            SQLiteDatabase database = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("name", name);
+            values.put("product", product);
+            values.put("id", id);
+            values.put("qty", qty);
+            values.put("price", price);
+            values.put("image", outputStream.toByteArray());
+
+            int val = (int) database.insert("cart", null, values);
+            if(val != -1){
+
+                Log.e("Success","Added to cart "+ values);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public ArrayList<cart> getCart() {
+        ArrayList<cart> cartData = new ArrayList<>();
+        try {
+
+
+            final String TABLE_NAME = "cart";
+
+            String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            //String[] data = null;
+            ;
+
+            if (cursor.moveToFirst()) {
+                do {
+                    String userName=cursor.getString(cursor.getColumnIndex("name"));
+                    String name=cursor.getString(cursor.getColumnIndex("product"));
+                    int price=cursor.getInt(cursor.getColumnIndex("price"));
+                    int id=cursor.getInt(cursor.getColumnIndex("id"));
+                    int qty = cursor.getInt(cursor.getColumnIndex("qty"));
+
+
+                    byte[] image=cursor.getBlob(cursor.getColumnIndex("image"));
+                    Bitmap img = BitmapFactory.decodeByteArray(image,0,image.length);
+
+
+                    cartData.add(new cart(id,userName,img,name,price,qty));
+                    // Log.e("Working", cursor.getString(cursor.getColumnIndex("title"))+"");
+                    // get the data into array, or class variable
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            return cartData;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void removeItem(String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("cart","id=?",new String[]{id});
+        Log.e("Removed", ""+id);
+
+    }
+
 }
