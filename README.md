@@ -1,5 +1,11 @@
 # United Store App
-Application application to 
+A User friendly Application application to allows users viewing various products available enables registered users to purchase desired products instantly.
+
+#### Technologies used
+* Java
+* Android Studio
+* SQLITE
+* NodeJS
 
 
 ![splash](https://user-images.githubusercontent.com/69053657/115064530-04b55e00-9ebb-11eb-8a23-7fd416974946.png)
@@ -10,8 +16,4 @@ Application application to
 ![log](https://user-images.githubusercontent.com/69053657/115064761-51009e00-9ebb-11eb-94d3-a0504a77554a.png)
 
 
-#### Technologies used
-* Java
-* Android Studio
-* SQLITE
-* NodeJS
+
